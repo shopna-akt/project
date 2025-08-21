@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicine Ordering Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #5d7c9d;
+  color: white;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: space-between;
+  gap:50px;
+  align-items: center;
+  z-index: 1000;
+}
+.search-bar{
+    flex:1;
+    margin:0 10px;
+}
+header .logo {
+  font-size: 22px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+
+
+.search-bar input {
+  width: 100%; /* full width of the search bar container */
+  max-width: 1000px; /* limit max width */
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.header-actions {
+  display: flex;
+  gap: 100px; /* fixed gap between Cart and Login/Register */
+  align-items: center;
+  flex-shrink: 0;
+  margin:0 200px;
+}
+
+.header-actions a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+/* Navigation Bar */
+.nav-bar {
+  margin-top: 60px; /* same as header height */
+  background: whitesmoke;
+  padding: 10px 30px;
+  position: sticky;
+  top: 60px; /* below fixed header */
+  z-index: 999;
+ justify-items: center;
+ margin-left:100px;
+ margin-right: 100px;
+}
+
+.nav-bar ul {
+  list-style: none;
+  display: flex;
+  gap: 100px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-bar ul li a {
+  text-decoration: none;
+  color:#0056b3;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.nav-bar ul li a:hover {
+  background: #87a4c5;
+}
+/* Hero Section */
+.hero {
+  width: 100%;
+  height: 400px; /* Adjust height */
+  background: url('medicine.avif') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.5); /* dark overlay for readability */
+  padding: 20px 30px;
+  border-radius: 10px;
+}
+
+.hero-content h1 {
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.4;
+}
+
+
+    .container {
+      padding: 70px 30px 30px 30px;
+      max-width: 1500px;
+      margin: auto;
+      
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 22px;
+      color:#0056b3;
+      text-align: center;
+    }
+    /* Shop by Category */
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.category-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.category-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.category-card h3 {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+
+    /* Medicine Cards */
+    .medicine-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 15px;
+    }
+
+    .medicine-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      text-align: center;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .medicine-card:hover {
+      transform: scale(1.05);
+    }
+
+    .discount-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: orange;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 5px 8px;
+      border-radius: 50%;
+    }
+
+    .medicine-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .medicine-card h3 {
+      font-size: 18px;
+      margin: 8px 0 5px;
+      color: #222;
+    }
+
+    .medicine-card p {
+      margin: 3px 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .price {
+      font-size: 16px;
+      color: green;
+      font-weight: bold;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: gray;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+
+    .medicine-card button {
+      margin-top: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .medicine-card button:hover {
+      background: #0056b3;
+    }
+.view-all-medicines {
+  position: relative;
+  background-image: url('takingmed.avif'); /* replace with your full image */
+  background-repeat: no-repeat;
+  background-size: cover; /* ensures the full image fits */
+  background-position: center;
+  height: 230px; /* adjust height as needed */
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-top: 40px;
+  border-radius: 10px;
+
+}
+
+.view-all-medicines .overlay {
+  text-align: center;
+  color: white;
+  padding: 20px 10px;
+  border-radius: 10px;
+
+}
+
+.view-all-medicines h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.view-all-medicines p {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.view-all-medicines .view-btn {
+  display: inline-block;
+  background: #28a745;
+  color: white;
+  text-decoration: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.view-all-medicines .view-btn:hover {
+  background: #1e7e34;
+}
+    /* Footer */
+
+footer {
+  background: #5d7c9d;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footer-title {
+    color:whitesmoke;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+.footer-contact {
+  font-size: 16px;
+  margin: 5px 0 10px 0;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 8px;
+  font-weight: bold;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-copy {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #e0e0e0;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Medishop</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search medicines...">
+    </div>
+    <div class="header-actions">
+      <a href="#">Cart</a>
+      <a href="#">Login/Register</a>
+    </div>
+  </header>
+  <!-- Navigation Menu -->
+<nav class="nav-bar">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Medicines</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Equipments</a></li>
+    <li><a href="#">Pharmacist Consultation</a></li>
+  </ul>
+</nav>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>The Leading Online Pharmacy and Healthcare Platform </h1>
+  </div>
+</section>
+<!-- Shop by Category Section -->
+<div class="container">
+  <h2>Shop by Category</h2>
+  
+  <div class="category-list">
+    <!-- Prescription Medicines -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/XV3CQ8r/fluclox.jpg" alt="Prescription Medicines">
+      <h3>Prescription Medicines</h3>
+    </div>
+
+    <!-- OTC Medicines -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/0y8Lzmc/napa-extra.jpg" alt="OTC Medicines">
+      <h3>OTC Medicines</h3>
+    </div>
+
+    <!-- Healthcare Items -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/ZK7h3Jv/healthcare.png" alt="Healthcare Items">
+      <h3>Healthcare Items</h3>
+    </div>
+
+    <!-- Medical Devices -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/jg0xqCV/devices.png" alt="Medical Devices">
+      <h3>Medical Devices</h3>
+    </div>
+
+    <!-- Men’s Products -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/60X1PM3/shaving-cream.png" alt="Men's Products">
+      <h3>Men's Products</h3>
+    </div>
+
+    <!-- Women’s Products -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/2dGj3T0/womens-products.png" alt="Women's Products">
+      <h3>Women's Products</h3>
+    </div>
+
+    <!-- Baby Care -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/3h5Qn5T/baby-lotion.png" alt="Baby Care">
+      <h3>Baby Care</h3>
+    </div>
+
+    <!-- Vitamins & Supplements -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/YTk3HqC/vitamins.png" alt="Vitamins & Supplements">
+      <h3>Vitamins & Supplements</h3>
+    </div>
+
+    <!-- Personal Care -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/0Fv3TVp/personal-care.png" alt="Personal Care">
+      <h3>Personal Care</h3>
+    </div>
+
+    <!-- Fitness & Nutrition -->
+    <div class="category-card">
+      <img src="https://i.ibb.co/qDfnTnR/fitness-nutrition.png" alt="Fitness & Nutrition">
+      <h3>Fitness & Nutrition</h3>
+    </div>
+  
+
+<div class="category-card">
+  <img src="https://i.ibb.co/7v2j1hM/laundry.png" alt="Laundry">
+  <h3>Laundry</h3>
+</div>
+<div class="category-card">
+  <img src="https://i.ibb.co/3NqY6yh/beverages.png" alt="Beverages">
+  <h3>Beverages</h3>
+</div>
+<div class="category-card">
+      <img src="https://i.ibb.co/8c9s1Zx/dental-care.png" alt="Dental Care">
+      <h3>Dental Care</h3>
+    </div>
+    <div class="category-card">
+      <img src="https://i.ibb.co/v4t1xj0/first-aid.png" alt="First Aid">
+      <h3>First Aid</h3>
+    </div>
+    <div class="category-card">
+      <img src="https://i.ibb.co/8xzFh4J/skin-care.png" alt="Skin Care">
+      <h3>Skin Care</h3>
+    </div>
+    <!-- COVID Essentials Category -->
+<div class="category-card">
+  <img src="https://i.ibb.co/3r4v9B2/covid-essentials.png" alt="COVID Essentials">
+  <h3>COVID Essentials</h3>
+</div>
+</div>
+</div>
+
+  <!-- Main Content -->
+<div class="container">
+  <h2>Prescription Medicines</h2>
+
+  <div class="medicine-list">
+    <!-- Fluclox 500 -->
+    <div class="medicine-card">
+      <div class="discount-badge">5%</div>
+      <img src="https://i.ibb.co/XV3CQ8r/fluclox.jpg" alt="Fluclox 500">
+      <h3>Fluclox 500</h3>
+      <p>Capsule - ACI Limited</p>
+      <p class="price">133.3 <span class="old-price">140</span></p>
+      <button onclick="addToCart('Fluclox 500', 133.3)">Add to Cart</button>
+    </div>
+
+    <!-- Febus 40 -->
+    <div class="medicine-card">
+      <div class="discount-badge">5%</div>
+      <img src="https://i.ibb.co/6YF9K6x/febus40.jpg" alt="Febus 40">
+      <h3>Febus 40</h3>
+      <p>Tablet - ACI Limited</p>
+      <p class="price">142.5 <span class="old-price">150</span></p>
+      <button onclick="addToCart('Febus 40', 142.5)">Add to Cart</button>
+    </div>
+
+    <!-- Anaflex 500 -->
+    <div class="medicine-card">
+      <div class="discount-badge">5%</div>
+      <img src="https://i.ibb.co/jL5hbPf/anaflex.jpg" alt="Anaflex 500">
+      <h3>Anaflex 500</h3>
+      <p>Tablet - ACI Limited</p>
+      <p class="price">152 <span class="old-price">160</span></p>
+      <button onclick="addToCart('Anaflex 500', 152)">Add to Cart</button>
+    </div>
+
+    <!-- Amoxicillin 500 -->
+    <div class="medicine-card">
+      <div class="discount-badge">7%</div>
+      <img src="https://i.ibb.co/yk1g97T/amoxicillin.jpg" alt="Amoxicillin 500">
+      <h3>Amoxicillin 500</h3>
+      <p>Capsule - Incepta Pharma</p>
+      <p class="price">93 <span class="old-price">100</span></p>
+      <button onclick="addToCart('Amoxicillin 500', 93)">Add to Cart</button>
+    </div>
+
+
+    <!-- Zinc 20 -->
+    <div class="medicine-card">
+      <div class="discount-badge">6%</div>
+      <img src="https://i.ibb.co/ck2pPbb/zinc.jpg" alt="Zinc 20">
+      <h3>Zinc 20</h3>
+      <p>Tablet - ACI Limited</p>
+      <p class="price">47 <span class="old-price">50</span></p>
+      <button onclick="addToCart('Zinc 20', 47)">Add to Cart</button>
+    </div>
+  </div>
+<div class="container">
+  <h2>OTC Medicines</h2>
+  <div class="medicine-list">
+    <!-- Fever -->
+    <div class="medicine-card">
+      <img src="https://i.ibb.co/Qn6jSYh/fever.jpg" alt="Fever">
+      <h3>Fever</h3>
+    </div>
+
+    <!-- Diarrhea -->
+    <div class="medicine-card">
+      <img src="https://i.ibb.co/8zJqpp7/diarrhea.jpg" alt="Diarrhea">
+      <h3>Diarrhea</h3>
+    </div>
+
+    <!-- Headache -->
+    <div class="medicine-card">
+      <img src="https://i.ibb.co/3h5fTR9/headache.jpg" alt="Headache">
+      <h3>Headache</h3>
+    </div>
+
+    <!-- Eczema -->
+    <div class="medicine-card">
+      <img src="https://i.ibb.co/8jymC8D/eczema.jpg" alt="Eczema">
+      <h3>Eczema</h3>
+    </div>
+
+    <!-- Pregnancy -->
+    <div class="medicine-card">
+      <img src="https://i.ibb.co/3MkdLDP/pregnancy.jpg" alt="Pregnancy">
+      <h3>Pregnancy</h3>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h2>Healthcare Items</h2>
+
+  <div class="medicine-list">
+    <!-- First Aid Kit -->
+    <div class="medicine-card">
+      <div class="discount-badge">10%</div>
+      <img src="https://i.ibb.co/tptHZbP/first-aid-kit.png" alt="First Aid Kit">
+      <h3>First Aid Kit</h3>
+      <p>Brand - Apollo</p>
+      <p class="price">900 <span class="old-price">1000</span></p>
+      <button onclick="addToCart('First Aid Kit', 900)">Add to Cart</button>
+    </div>
+
+    <!-- Face Mask -->
+    <div class="medicine-card">
+      <div class="discount-badge">15%</div>
+      <img src="https://i.ibb.co/p39rhzH/face-mask.png" alt="Face Mask">
+      <h3>Face Mask (Box of 50)</h3>
+      <p>Brand - 3M</p>
+      <p class="price">255 <span class="old-price">300</span></p>
+      <button onclick="addToCart('Face Mask (Box of 50)', 255)">Add to Cart</button>
+    </div>
+
+    <!-- Glucometer -->
+    <div class="medicine-card">
+      <div class="discount-badge">5%</div>
+      <img src="https://i.ibb.co/fvLqPLT/glucometer.png" alt="Glucometer">
+      <h3>Glucometer</h3>
+      <p>Brand - Accu-Chek</p>
+      <p class="price">1900 <span class="old-price">2000</span></p>
+      <button onclick="addToCart('Glucometer', 1900)">Add to Cart</button>
+    </div>
+
+    <!-- Blood Pressure Monitor -->
+    <div class="medicine-card">
+      <div class="discount-badge">8%</div>
+      <img src="https://i.ibb.co/hZj1hKf/blood-pressure.png" alt="Blood Pressure Monitor">
+      <h3>Blood Pressure Monitor</h3>
+      <p>Brand - Omron</p>
+      <p class="price">2760 <span class="old-price">3000</span></p>
+      <button onclick="addToCart('Blood Pressure Monitor', 2760)">Add to Cart</button>
+    </div>
+
+    <!-- Thermometer -->
+    <div class="medicine-card">
+      <div class="discount-badge">12%</div>
+      <img src="https://i.ibb.co/FKrZ3Zj/thermometer.png" alt="Thermometer">
+      <h3>Thermometer</h3>
+      <p>Brand - Microlife</p>
+      <p class="price">176 <span class="old-price">200</span></p>
+      <button onclick="addToCart('Thermometer', 176)">Add to Cart</button>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h2>Medical Devices & Equipment</h2>
+
+  <div class="medicine-list">
+    <!-- Nebulizer -->
+    <div class="medicine-card">
+      <div class="discount-badge">10%</div>
+      <img src="https://i.ibb.co/0c2yHfW/nebulizer.png" alt="Nebulizer">
+      <h3>Nebulizer Machine</h3>
+      <p>Brand - Philips</p>
+      <p class="price">2700 <span class="old-price">3000</span></p>
+      <button onclick="addToCart('Nebulizer Machine', 2700)">Add to Cart</button>
+    </div>
+
+    <!-- Wheelchair -->
+    <div class="medicine-card">
+      <div class="discount-badge">7%</div>
+      <img src="https://i.ibb.co/Fg2CZdt/wheelchair.png" alt="Wheelchair">
+      <h3>Wheelchair</h3>
+      <p>Brand - Apex</p>
+      <p class="price">9300 <span class="old-price">10000</span></p>
+      <button onclick="addToCart('Wheelchair', 9300)">Add to Cart</button>
+    </div>
+
+    <!-- Oxygen Cylinder -->
+    <div class="medicine-card">
+      <div class="discount-badge">12%</div>
+      <img src="https://i.ibb.co/4RMLdCm/oxygen-cylinder.png" alt="Oxygen Cylinder">
+      <h3>Oxygen Cylinder</h3>
+      <p>Brand - Linde</p>
+      <p class="price">8800 <span class="old-price">10000</span></p>
+      <button onclick="addToCart('Oxygen Cylinder', 8800)">Add to Cart</button>
+    </div>
+
+    <!-- Crutches -->
+    <div class="medicine-card">
+      <div class="discount-badge">5%</div>
+      <img src="https://i.ibb.co/NsM3Lg6/crutches.png" alt="Crutches">
+      <h3>Crutches</h3>
+      <p>Brand - Rehamo</p>
+      <p class="price">1425 <span class="old-price">1500</span></p>
+      <button onclick="addToCart('Crutches', 1425)">Add to Cart</button>
+    </div>
+
+    <!-- Stethoscope -->
+    <div class="medicine-card">
+      <div class="discount-badge">15%</div>
+      <img src="https://i.ibb.co/8KjcYjm/stethoscope.png" alt="Stethoscope">
+      <h3>Stethoscope</h3>
+      <p>Brand - Littmann</p>
+      <p class="price">3400 <span class="old-price">4000</span></p>
+      <button onclick="addToCart('Stethoscope', 3400)">Add to Cart</button>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h2>Men's Products</h2>
+
+  <div class="medicine-list">
+    <!-- Shaving Cream -->
+    <div class="medicine-card">
+      <div class="discount-badge">8%</div>
+      <img src="https://i.ibb.co/60X1PM3/shaving-cream.png" alt="Shaving Cream">
+      <h3>Shaving Cream</h3>
+      <p>Brand - Gillette</p>
+      <p class="price">230 <span class="old-price">250</span></p>
+      <button onclick="addToCart('Shaving Cream', 230)">Add to Cart</button>
+    </div>
+
+    <!-- Men's Shampoo -->
+    <div class="medicine-card">
+      <div class="discount-badge">10%</div>
+      <img src="https://i.ibb.co/vPt0cPr/mens-shampoo.png" alt="Men's Shampoo">
+      <h3>Men's Shampoo</h3>
+      <p>Brand - Head & Shoulders</p>
+      <p class="price">450 <span class="old-price">500</span></p>
+      <button onclick="addToCart('Men\'s Shampoo', 450)">Add to Cart</button>
+    </div>
+
+    <!-- Beard Oil -->
+    <div class="medicine-card">
+      <div class="discount-badge">12%</div>
+      <img src="https://i.ibb.co/nQgbpd1/beard-oil.png" alt="Beard Oil">
+      <h3>Beard Oil</h3>
+      <p>Brand - UrbanGabru</p>
+      <p class="price">350 <span class="old-price">400</span></p>
+      <button onclick="addToCart('Beard Oil', 350)">Add to Cart</button>
+    </div>
+
+    <!-- Face Wash -->
+    <div class="medicine-card">
+      <div class="discount-badge">6%</div>
+      <img src="https://i.ibb.co/0YPkqHv/mens-facewash.png" alt="Men's Face Wash">
+      <h3>Men's Face Wash</h3>
+      <p>Brand - Nivea Men</p>
+      <p class="price">330 <span class="old-price">350</span></p>
+      <button onclick="addToCart('Men\'s Face Wash', 330)">Add to Cart</button>
+    </div>
+
+    <!-- Deodorant -->
+    <div class="medicine-card">
+      <div class="discount-badge">15%</div>
+      <img src="https://i.ibb.co/VBwcM6x/mens-deodorant.png" alt="Men's Deodorant">
+      <h3>Men's Deodorant</h3>
+      <p>Brand - Axe</p>
+      <p class="price">425 <span class="old-price">500</span></p>
+      <button onclick="addToCart('Men\'s Deodorant', 425)">Add to Cart</button>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h2>Baby Care Products</h2>
+
+  <div class="medicine-list">
+    <!-- Baby Lotion -->
+    <div class="medicine-card">
+      <div class="discount-badge">10%</div>
+      <img src="https://i.ibb.co/3h5Qn5T/baby-lotion.png" alt="Baby Lotion">
+      <h3>Baby Lotion</h3>
+      <p>Brand - Johnson's</p>
+      <p class="price">400 <span class="old-price">450</span></p>
+      <button onclick="addToCart('Baby Lotion', 400)">Add to Cart</button>
+    </div>
+
+    <!-- Baby Powder -->
+    <div class="medicine-card">
+      <div class="discount-badge">8%</div>
+      <img src="https://i.ibb.co/yhFch6K/baby-powder.png" alt="Baby Powder">
+      <h3>Baby Powder</h3>
+      <p>Brand - Johnson's</p>
+      <p class="price">350 <span class="old-price">380</span></p>
+      <button onclick="addToCart('Baby Powder', 350)">Add to Cart</button>
+    </div>
+
+    <!-- Baby Shampoo -->
+    <div class="medicine-card">
+      <div class="discount-badge">12%</div>
+      <img src="https://i.ibb.co/z5qFQrf/baby-shampoo.png" alt="Baby Shampoo">
+      <h3>Baby Shampoo</h3>
+      <p>Brand - Dove</p>
+      <p class="price">380 <span class="old-price">430</span></p>
+      <button onclick="addToCart('Baby Shampoo', 380)">Add to Cart</button>
+    </div>
+
+    <!-- Baby Wipes -->
+    <div class="medicine-card">
+      <div class="discount-badge">15%</div>
+      <img src="https://i.ibb.co/4VtXqwh/baby-wipes.png" alt="Baby Wipes">
+      <h3>Baby Wipes</h3>
+      <p>Brand - Huggies</p>
+      <p class="price">250 <span class="old-price">300</span></p>
+      <button onclick="addToCart('Baby Wipes', 250)">Add to Cart</button>
+    </div>
+
+    <!-- Baby Diapers -->
+    <div class="medicine-card">
+      <div class="discount-badge">10%</div>
+      <img src="https://i.ibb.co/0sZxV6t/baby-diapers.png" alt="Baby Diapers">
+      <h3>Baby Diapers</h3>
+      <p>Brand - Pampers</p>
+      <p class="price">950 <span class="old-price">1050</span></p>
+      <button onclick="addToCart('Baby Diapers', 950)">Add to Cart</button>
+    </div>
+  </div>
+</div>
+  <!-- View All Medicines Section -->
+<section class="view-all-medicines">
+  <div class="overlay">
+    <h2>Explore All Medicines</h2>
+    <p>Find your medicines and healthcare products easily</p>
+    <a href="#" class="view-btn">View All</a>
+  </div>
+</section>
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <h2 class="footer-title">MediShop</h2>
+    <p class="footer-contact">
+      Email: <a href="mailto:info@medishop.com">info@medishop.com</a> | 
+      Phone: <a href="tel:+880123456789">+880 1234 56789</a>
+    </p>
+    <p class="footer-links">
+      <a href="#">About Us</a> | 
+      <a href="#">Contact</a> | 
+      <a href="#">Privacy Policy</a>
+    </p>
+    <p class="footer-copy">&copy; 2025 MediShop. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
